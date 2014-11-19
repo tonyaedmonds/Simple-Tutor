@@ -37,7 +37,7 @@ public class Problem {
 	}
 	@Override
 	public boolean equals(Object other){
-		//Based on the problem description each problem has a unique name
+		//Each problem has a unique name
 		if(!other.getClass().equals(this.getClass()) || other == null)
 			return false;
 		Problem otherProblem = (Problem)other;

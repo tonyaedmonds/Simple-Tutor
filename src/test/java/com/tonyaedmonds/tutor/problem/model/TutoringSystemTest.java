@@ -12,6 +12,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.tonyaedmonds.tutor.exceptions.TutorException;
 import com.tonyaedmonds.tutor.model.Problem;
 import com.tonyaedmonds.tutor.model.Skill;
 import com.tonyaedmonds.tutor.model.Student;
@@ -40,7 +41,7 @@ public class TutoringSystemTest {
 	}
 	
 	@Test
-	public void selectNextProblem_ShouldReturnProblem4(){
+	public void selectNextProblem_ShouldReturnProblem4() throws TutorException{
 		Student student = createStudent();
 		List<Problem> problems = createProblems();
 		
@@ -56,7 +57,15 @@ public class TutoringSystemTest {
 		
 		assertThat(result, is(expected));
 		
+	}
+	
+	@Test(expected=TutorException.class)
+	public void selectNextProblem_ShouldThrowException() throws TutorException{
+		Student student = createStudent();
+		List<Problem> problems = new ArrayList<Problem>();
 		
+		TutoringSystem system = new TutoringSystem();
+		system.selectNextProblem(student, problems);
 	}
 	
 	////////////////////////////////////////////////////

@@ -1,6 +1,5 @@
 package com.tonyaedmonds.tutor;
 
-import com.tonyaedmonds.tutor.model.Student;
 import com.tonyaedmonds.tutor.model.TutoringSystem;
 
 /**
