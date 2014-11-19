@@ -3,13 +3,11 @@
  */
 package com.tonyaedmonds.tutor.problem.model;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 
 import java.util.ArrayList;
 import java.util.List;
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.assertThat;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -25,9 +23,12 @@ import com.tonyaedmonds.tutor.model.TutoringSystem;
  *
  */
 public class TutoringSystemTest {
-	Skill skillMultiplyFractions;
-	Skill skillAddFractions;
-	Skill skillAddDecimals;
+	private Skill skillMultiplyFractions;
+	private Skill skillAddFractions;
+	private Skill skillAddDecimals;
+	
+	private Problem problem1;
+	private Problem problem4;
 	
 	private final String MULTIPLY_FRACTIONS = "multiply-fractions";
 	private final String ADD_FRACTIONS = "add-fractions";
@@ -35,6 +36,32 @@ public class TutoringSystemTest {
 	
 	@Before
 	public void init(){
+		createSkills();
+	}
+	
+	@Test
+	public void selectNextProblem_ShouldReturnProblem4(){
+		Student student = createStudent();
+		List<Problem> problems = createProblems();
+		
+		//expected
+		Problem expected = new Problem();
+		expected.setName("problem4");
+		expected.setProblem("1/2*3/4+5/6");
+		
+		TutoringSystem system = new TutoringSystem();
+		
+		//result
+		Problem result = system.selectNextProblem(student, problems);
+		
+		assertThat(result, is(expected));
+		
+		
+	}
+	
+	////////////////////////////////////////////////////
+	
+	public void createSkills(){
 		skillMultiplyFractions = new Skill();
 		skillMultiplyFractions.setName("multiply-fractions");
 		
@@ -43,12 +70,35 @@ public class TutoringSystemTest {
 		
 		skillAddDecimals = new Skill();
 		skillAddDecimals.setName("add-decimals");
-		
 	}
 	
-	@Test
-	public void selectNextProblem(){
+	public List<Problem> createProblems(){
+		List<Problem> problems = new ArrayList<Problem>();
+		problem1 = new Problem();
+		problem1.setName("problem1");
+		problem1.setSkills(new ArrayList<Skill>());
+		problem1.getSkills().add(skillAddDecimals);
+		problem1.setProblem("3.4+5.6");
+		problems.add(problem1);
+		
+		problem4 = new Problem();
+		problem4.setName("problem4");
+		problem4.setSkills(new ArrayList<Skill>());
+		problem4.getSkills().add(skillMultiplyFractions);
+		problem4.getSkills().add(skillAddFractions);
+		problem4.setProblem("1/2*3/4+5/6");
+		problems.add(problem4);
+		
+		return problems;
+	}
+	
+	public Student createStudent(){
 		Student student = new Student();
+		student.setCurrentSkills(createStudentSkills());
+		return student;
+	}
+
+	public List<StudentSkill> createStudentSkills(){
 		List<StudentSkill> studentSkills = new ArrayList<StudentSkill>();
 		StudentSkill addDecimals = new StudentSkill();
 		addDecimals.setName(ADD_DECIMALS);
@@ -65,37 +115,6 @@ public class TutoringSystemTest {
 		multiplyFractions.setScore(.53);
 		studentSkills.add(multiplyFractions);
 		
-		
-		student.setCurrentSkills(studentSkills);
-		
-		List<Problem> problems = new ArrayList<Problem>();
-		Problem problem = new Problem();
-		problem.setName("problem1");
-		problem.setSkills(new ArrayList<Skill>());
-		problem.getSkills().add(skillAddDecimals);
-		problem.setProblem("3.4+5.6");
-		problems.add(problem);
-		
-		problem = new Problem();
-		problem.setName("problem4");
-		problem.setSkills(new ArrayList<Skill>());
-		problem.getSkills().add(skillMultiplyFractions);
-		problem.getSkills().add(skillAddFractions);
-		problem.setProblem("1/2*3/4+5/6");
-		problems.add(problem);
-
-		//expected
-		Problem expected = new Problem();
-		expected.setName("problem4");
-		expected.setProblem("1/2*3/4+5/6");
-		
-		TutoringSystem system = new TutoringSystem();
-		
-		Problem result = system.selectNextProblem(student, problems);
-		
-		assertThat(result, is(expected));
-		
-		
+		return studentSkills;
 	}
-
 }

@@ -1,5 +1,8 @@
 package com.tonyaedmonds.tutor;
 
+import com.tonyaedmonds.tutor.model.Student;
+import com.tonyaedmonds.tutor.model.TutoringSystem;
+
 /**
  * @author tonyaedmonds
  *
@@ -7,7 +10,8 @@ package com.tonyaedmonds.tutor;
 public class Application {
 	
 	public static void main(String[] args){
-		System.out.println("test");
+		TutoringSystem tutor = new TutoringSystem();
 	}
-
+	
+	
 }
