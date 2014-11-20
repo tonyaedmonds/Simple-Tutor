@@ -1,4 +1,4 @@
 *.class
-/target/*
+/target/**
 */META-INF/*
 *.properties
