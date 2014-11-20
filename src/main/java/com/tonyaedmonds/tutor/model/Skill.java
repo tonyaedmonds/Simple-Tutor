@@ -1,5 +1,7 @@
 package com.tonyaedmonds.tutor.model;
 
+import com.tonyaedmonds.tutor.enums.SkillName;
+
 /**
  * Represents a skill in the tutoring system
  * 
@@ -7,13 +9,13 @@ package com.tonyaedmonds.tutor.model;
  *
  */
 public class Skill {
-	private String name;
-
-	public String getName() {
+	private SkillName name;
+	
+	public SkillName getName() {
 		return name;
 	}
 
-	public void setName(String name) {
+	public void setName(SkillName name) {
 		this.name = name;
 	}
 

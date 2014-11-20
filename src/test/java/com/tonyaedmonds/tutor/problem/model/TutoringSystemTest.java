@@ -12,6 +12,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.tonyaedmonds.tutor.enums.SkillName;
 import com.tonyaedmonds.tutor.exceptions.TutorException;
 import com.tonyaedmonds.tutor.model.Problem;
 import com.tonyaedmonds.tutor.model.Skill;
@@ -31,17 +32,13 @@ public class TutoringSystemTest {
 	private Problem problem1;
 	private Problem problem4;
 	
-	private final String MULTIPLY_FRACTIONS = "multiply-fractions";
-	private final String ADD_FRACTIONS = "add-fractions";
-	private final String ADD_DECIMALS = "add-decimals";
-	
 	@Before
 	public void init(){
 		createSkills();
 	}
 	
 	@Test
-	public void selectNextProblem_ShouldReturnProblem4() throws TutorException{
+	public void selectNextProblem_MatchedSkills_ShouldReturnProblem4() throws TutorException{
 		Student student = createStudent();
 		List<Problem> problems = createProblems();
 		
@@ -60,7 +57,7 @@ public class TutoringSystemTest {
 	}
 	
 	@Test(expected=TutorException.class)
-	public void selectNextProblem_ShouldThrowException() throws TutorException{
+	public void selectNextProblem_NoMatchingSkills_ShouldThrowException() throws TutorException{
 		Student student = createStudent();
 		List<Problem> problems = new ArrayList<Problem>();
 		
@@ -72,13 +69,13 @@ public class TutoringSystemTest {
 	
 	public void createSkills(){
 		skillMultiplyFractions = new Skill();
-		skillMultiplyFractions.setName("multiply-fractions");
+		skillMultiplyFractions.setName(SkillName.MULTIPLY_FRACTIONS);
 		
 		skillAddFractions = new Skill();
-		skillAddFractions.setName("add-fractions");
+		skillAddFractions.setName(SkillName.ADD_FRACTIONS);
 		
 		skillAddDecimals = new Skill();
-		skillAddDecimals.setName("add-decimals");
+		skillAddDecimals.setName(SkillName.ADD_DECIMALS);
 	}
 	
 	public List<Problem> createProblems(){
@@ -110,17 +107,17 @@ public class TutoringSystemTest {
 	public List<StudentSkill> createStudentSkills(){
 		List<StudentSkill> studentSkills = new ArrayList<StudentSkill>();
 		StudentSkill addDecimals = new StudentSkill();
-		addDecimals.setName(ADD_DECIMALS);
+		addDecimals.setName(SkillName.ADD_DECIMALS);
 		addDecimals.setScore(.97);
 		studentSkills.add(addDecimals);
 		
 		StudentSkill addFractions = new StudentSkill();
-		addFractions.setName(ADD_FRACTIONS);
+		addFractions.setName(SkillName.ADD_FRACTIONS);
 		addFractions.setScore(.17);
 		studentSkills.add(addFractions);
 		
 		StudentSkill multiplyFractions = new StudentSkill();
-		multiplyFractions.setName(MULTIPLY_FRACTIONS);
+		multiplyFractions.setName(SkillName.MULTIPLY_FRACTIONS);
 		multiplyFractions.setScore(.53);
 		studentSkills.add(multiplyFractions);
 		

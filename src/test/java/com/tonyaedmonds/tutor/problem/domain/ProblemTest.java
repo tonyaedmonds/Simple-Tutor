@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.tonyaedmonds.tutor.enums.SkillName;
 import com.tonyaedmonds.tutor.model.Problem;
 import com.tonyaedmonds.tutor.model.Skill;
 
@@ -22,10 +23,10 @@ public class ProblemTest {
 	@Before
 	public void init(){
 		skillAddition = new Skill();
-		skillAddition.setName("add");
+		skillAddition.setName(SkillName.ADD);
 		
 		skillMultiplication = new Skill();
-		skillMultiplication.setName("multiply");
+		skillMultiplication.setName(SkillName.MULTIPLY);
 		
 		problem1 = new Problem();
 		problem1.setName("problem1");

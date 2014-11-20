@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.tonyaedmonds.tutor.enums.SkillName;
 import com.tonyaedmonds.tutor.model.Student;
 import com.tonyaedmonds.tutor.model.StudentSkill;
 
@@ -21,10 +22,10 @@ public class StudentTest {
 		studentSkillAddFractions = new StudentSkill();
 		studentSkillMultiplyFractions = new StudentSkill();
 		
-		studentSkillAddFractions.setName("add-fractions");
+		studentSkillAddFractions.setName(SkillName.ADD_FRACTIONS);
 		studentSkillAddFractions.setScore(.78);
 		
-		studentSkillAddDecimals.setName("add-decimals");
+		studentSkillAddDecimals.setName(SkillName.ADD_DECIMALS);
 		studentSkillAddDecimals.setScore(.95);
 		
 		studentSkillMultiplyFractions = new StudentSkill();
