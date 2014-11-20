@@ -1,24 +1,21 @@
 /**
  * 
  */
-package com.tonyaedmonds.tutor.problem.model;
+package com.tonyaedmonds.tutor.model;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import com.tonyaedmonds.tutor.enums.SkillName;
 import com.tonyaedmonds.tutor.exceptions.TutorException;
-import com.tonyaedmonds.tutor.model.Problem;
-import com.tonyaedmonds.tutor.model.Skill;
-import com.tonyaedmonds.tutor.model.Student;
-import com.tonyaedmonds.tutor.model.StudentSkill;
-import com.tonyaedmonds.tutor.model.TutoringSystem;
 
 /**
  * @author tonyaedmonds
@@ -29,11 +26,19 @@ public class TutoringSystemTest {
 	private Skill skillAddFractions;
 	private Skill skillAddDecimals;
 	
+	private StudentSkill stuSkillMultiplyFractions;
+	private StudentSkill stuSkillAddFractions;
+	private StudentSkill stuSkillAddDecimals;
+	
+	private List<StudentSkill> studentSkills;
+	
 	private Problem problem1;
 	private Problem problem4;
 	
 	@Before
 	public void init(){
+		studentSkills = new ArrayList<StudentSkill>();
+		createStudentSkills();
 		createSkills();
 	}
 	
@@ -64,6 +69,7 @@ public class TutoringSystemTest {
 		TutoringSystem system = new TutoringSystem();
 		system.selectNextProblem(student, problems);
 	}
+	
 	
 	////////////////////////////////////////////////////
 	
@@ -100,26 +106,33 @@ public class TutoringSystemTest {
 	
 	public Student createStudent(){
 		Student student = new Student();
-		student.setCurrentSkills(createStudentSkills());
+		student.setCurrentSkills(getStudentSkillsList());
 		return student;
 	}
 
-	public List<StudentSkill> createStudentSkills(){
-		List<StudentSkill> studentSkills = new ArrayList<StudentSkill>();
-		StudentSkill addDecimals = new StudentSkill();
-		addDecimals.setName(SkillName.ADD_DECIMALS);
-		addDecimals.setScore(.97);
-		studentSkills.add(addDecimals);
+	public void createStudentSkills(){
+		stuSkillAddDecimals = new StudentSkill();
+		stuSkillAddDecimals.setName(SkillName.ADD_DECIMALS);
+		stuSkillAddDecimals.setScore(.97);
+
+		stuSkillAddFractions = new StudentSkill();
+		stuSkillAddFractions.setName(SkillName.ADD_FRACTIONS);
+		stuSkillAddFractions.setScore(.17);
 		
-		StudentSkill addFractions = new StudentSkill();
-		addFractions.setName(SkillName.ADD_FRACTIONS);
-		addFractions.setScore(.17);
-		studentSkills.add(addFractions);
+		stuSkillMultiplyFractions = new StudentSkill();
+		stuSkillMultiplyFractions.setName(SkillName.MULTIPLY_FRACTIONS);
+		stuSkillMultiplyFractions.setScore(.53);
+	}
+	
+	public List<StudentSkill> getStudentSkillsList(){
+//		if(studentSkills.size() != 0)
+//			return studentSkills;
+//		
+		createStudentSkills();
 		
-		StudentSkill multiplyFractions = new StudentSkill();
-		multiplyFractions.setName(SkillName.MULTIPLY_FRACTIONS);
-		multiplyFractions.setScore(.53);
-		studentSkills.add(multiplyFractions);
+		studentSkills.add(stuSkillAddDecimals);
+		studentSkills.add(stuSkillAddFractions);
+		studentSkills.add(stuSkillMultiplyFractions);
 		
 		return studentSkills;
 	}

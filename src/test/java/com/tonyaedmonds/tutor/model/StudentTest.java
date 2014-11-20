@@ -1,4 +1,4 @@
-package com.tonyaedmonds.tutor.problem.domain;
+package com.tonyaedmonds.tutor.model;
 
 import java.util.ArrayList;
 

@@ -42,12 +42,9 @@ public class TutoringSystem {
 		Problem next = null;
 
 		Set<StudentSkill> studentSkills = new HashSet<StudentSkill>(student.getSkillsBelowThreshold(threshold));
-		for(Problem aProblem: problemSet){
-			Set<Skill> intersection = new HashSet<Skill>(studentSkills);
 
-			//get the intersection of the skills in the problem and student
-			//skills below the threshold
-			intersection.retainAll(new HashSet<Skill>(aProblem.getSkills()));
+		for(Problem aProblem: problemSet){
+			Set<Skill> intersection = getIntersectionOfSkills(studentSkills, aProblem);
 
 			//select an arbitrary problem that contains a skill that 
 			//needs to be worked on by the student
@@ -64,6 +61,15 @@ public class TutoringSystem {
 			}
 		}
 		throw new TutorException("Appropriate next problem could not be found.");
+	}
+
+	/* Gets the intersection of the skills in the problem and student
+	 * skills below the threshold*/
+
+	protected Set<Skill> getIntersectionOfSkills(Set<StudentSkill> studentSkills, Problem aProblem) throws TutorException {
+		HashSet<Skill> intersection = new HashSet<Skill>(studentSkills);
+		intersection.retainAll(new HashSet<Skill>(aProblem.getSkills()));
+		return intersection;
 	}
 
 }
